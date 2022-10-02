@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cochabamba</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
+    <style>
+        h1{
+            
+            font-family: 'Passions Conflict', cursive;
+            text-align: center;
+        }
+        #map{
+
+            position: absolute;
+            top: 130px;;
+            bottom:0;
+            left: 0;
+            right: 0;
+
+        }
+    </style>    
+    <h1>Mis Lugares Favoritos</h1>
+    <select name="select-ubication" id="select-ubication">
+        <option value="-1">Seleccione que sitio desea ver</option>
+        <option value="-17.34862319897264, -66.19886782411764">Marcador en el Vivero Paraiso</option>
+        <option value="-17.373727778340943, -66.18002682305321">Poligono en Plaza de las Gibas</option>
+        <option value="-17.39148104654551, -66.1884275199701">Ruta al Punto de Encuentro</option>
+    </select>
+</head>
+<body>
+
+    <div id="map"></div>
+    <script type="text/javascript">
+
+        document.getElementById('select-ubication').addEventListener('change', function(e){
+            let coords = e.target.value.split(",");
+            map.flyTo(coords,17);
+        })
+
+        var map = L.map('map').setView([-17.34862319897264, -66.19886782411764],17);
+
+        L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=GefuU4TDDudibMXPsoGw',{
+            atribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+        }).addTo(map);
+        var ruta = {
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": [
+                            [
+                                -66.19472980499268,
+                                -17.392702130658442
+                            ],
+                            [
+                                -66.18741273880005,
+                                -17.39294784961222
+                            ],
+                            [
+                                -66.18627548217773,
+                                -17.389999200381748
+                            ],
+                            [
+                                -66.18492364883423,
+                                -17.390470168378872
+                            ],
+                            [
+                                -66.18503093719482,
+                                -17.39118685648285
+                            ]
+                            ]
+                        }
+                        }
+                    ]
+                    }
+        L.geoJson(ruta).addTo(map);
+
+        var marker = L.marker([-17.34862319897264, -66.19886782411764]).addTo(map);
+        marker.bindPopup("<h1>Vivero Paraiso</h1>").openPopup();
+
+        var circulo = L. circle([-17.393782,-66.156986],{
+            color:'green',
+            fillcolor: 'red',
+            fillOpacity:0.4,
+            radius:100
+        }).addTo(map);
+        circulo.bindPopup("<h1>Plaza principal</h1>");
+
+        var poligono = L.polygon([
+            [-17.373185332457183, -66.17953513280358],
+            [-17.373146586261146, -66.18026590179845],
+            [-17.374519918649757, -66.1805906880184],
+            [-17.37395594954211, -66.1795170891247]
+        ]).addTo(map);
+        poligono.bindPopup("<h1>Plaza principal</h1><p>Zona central Cochabamaba</p>").openmPopup();
+
+
+    </script>
+
+</body>
+</html>
