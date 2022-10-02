@@ -17,13 +17,12 @@
             text-align: center;
         }
         #map{
-
             position: absolute;
             top: 130px;;
-            bottom:0;
-            left: 0;
+            bottom:10%;
+            left: 10%;
             right: 0;
-
+            
         }
     </style>    
     <h1>Mis Lugares Favoritos</h1>
@@ -35,6 +34,8 @@
     </select>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v15.0" nonce="qRl2ewAm"></script>
 
     <div id="map"></div>
     <script type="text/javascript">
@@ -106,6 +107,6 @@
 
 
     </script>
-
+    <div class="fb-comments" data-href="https://cinthiamor.github.io/MAPSmisLugaresFavoritos/" data-width="300" data-numposts="3"  data-top="700"  margin-top="20px";></div>
 </body>
 </html>
